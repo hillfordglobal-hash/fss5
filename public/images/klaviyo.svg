@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fff9"/><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#dff8e7"/></linearGradient>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%"><stop stop-color="#34c759" stop-opacity=".28"/><stop offset="1" stop-color="#34c759" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#1d1d1f" flood-opacity=".16"/></filter>
+  </defs>
+  <rect width="1280" height="720" rx="46" fill="url(#bg)"/>
+  <circle cx="1030" cy="132" r="260" fill="url(#orb)"/>
+  <circle cx="140" cy="650" r="300" fill="url(#orb)" opacity=".55"/>
+  <g filter="url(#shadow)"><rect x="72" y="70" width="1088" height="560" rx="42" fill="rgba(255,255,255,.58)" stroke="rgba(255,255,255,.85)"/></g>
+  <text x="108" y="150" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="24" font-weight="800" letter-spacing="3" fill="#34c759">ZERO TO FIRST SALE</text>
+  <text x="108" y="232" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="58" font-weight="800" letter-spacing="-2" fill="#0b0b0f">Klaviyo</text>
+  <text x="108" y="286" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="28" font-weight="500" fill="#515154">Email, SMS, abandoned cart, post-purchase lifecycle automation</text>
+  <g transform="translate(108 348)">
+    <rect width="980" height="96" rx="30" fill="rgba(255,255,255,.64)" stroke="rgba(29,29,31,.08)"/>
+    <path d="M70 48 H900" stroke="#34c759" stroke-width="8" stroke-linecap="round" opacity=".18"/>
+    <path d="M70 48 H690" stroke="#34c759" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="70" cy="48" r="18" fill="#34c759"/><circle cx="310" cy="48" r="18" fill="#34c759"/><circle cx="570" cy="48" r="18" fill="#34c759"/><circle cx="900" cy="48" r="18" fill="#fff" stroke="#34c759" stroke-width="5"/>
+  </g>
+  <path d="M310 557 C 350 557, 360 557, 390 557" stroke="#34c759" stroke-width="4" stroke-linecap="round" opacity=".45"/><path d="M560 557 C 600 557, 610 557, 640 557" stroke="#34c759" stroke-width="4" stroke-linecap="round" opacity=".45"/><path d="M810 557 C 850 557, 860 557, 890 557" stroke="#34c759" stroke-width="4" stroke-linecap="round" opacity=".45"/><g transform="translate(100 520)"><rect width="210" height="74" rx="24" fill="rgba(255,255,255,.68)" stroke="rgba(29,29,31,.10)"/><circle cx="38" cy="37" r="14" fill="#34c759" opacity=".9"/><text x="62" y="44" font-size="24" font-weight="700" fill="#1d1d1f">Email</text></g><g transform="translate(350 520)"><rect width="210" height="74" rx="24" fill="rgba(255,255,255,.68)" stroke="rgba(29,29,31,.10)"/><circle cx="38" cy="37" r="14" fill="#34c759" opacity=".9"/><text x="62" y="44" font-size="24" font-weight="700" fill="#1d1d1f">SMS</text></g><g transform="translate(600 520)"><rect width="210" height="74" rx="24" fill="rgba(255,255,255,.68)" stroke="rgba(29,29,31,.10)"/><circle cx="38" cy="37" r="14" fill="#34c759" opacity=".9"/><text x="62" y="44" font-size="24" font-weight="700" fill="#1d1d1f">Flows</text></g><g transform="translate(850 520)"><rect width="210" height="74" rx="24" fill="rgba(255,255,255,.68)" stroke="rgba(29,29,31,.10)"/><circle cx="38" cy="37" r="14" fill="#34c759" opacity=".9"/><text x="62" y="44" font-size="24" font-weight="700" fill="#1d1d1f">Revenue</text></g>
+</svg>
