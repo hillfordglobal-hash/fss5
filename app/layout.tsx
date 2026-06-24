@@ -19,6 +19,7 @@ const cssFiles = [
   '/css/3-components.css',
   '/css/4-features-redesign.css',
   '/css/5-polish-fixes-final.css',
+  '/css/6-apple-redesign.css',
 ];
 
 export const metadata: Metadata = {
