@@ -1,0 +1,504 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   FIRST SALE SOCIETY — 6 · APPLE REDESIGN OVERRIDE
+   Loads LAST in the cascade (after 1–5). Pure restyle: no markup/content
+   changes. Retunes the design tokens to the Apple.com editorial system,
+   then refines the app shell, hero, cards, buttons and links to match.
+   Also neutralizes leftover orange (rgba(255,77,0) / rgba(255,122,64))
+   from the site's pre-Apple palette.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   1 · DESIGN TOKENS — LIGHT (default + body.light-mode)
+   ───────────────────────────────────────────────────────────── */
+:root,
+body.light-mode,
+html.preload-light body {
+  /* Surfaces — warm Apple white */
+  --bg: #fbfbfd;
+  --surface: #ffffff;
+  --surface2: #f5f5f7;
+  --surface3: #ececef;
+  --glass: rgba(0,0,0,0.02);
+  --glass2: rgba(0,0,0,0.045);
+
+  /* Hairline borders */
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.12);
+  --border3: rgba(0,0,0,0.18);
+
+  /* Accent — Apple system blue + gradient companion */
+  --accent: #0066cc;
+  --accent2: #4d94ff;
+  --accent3: #0066cc;
+  --accent-h: #0055b3;
+  --accent-glow: rgba(0,102,204,0.08);
+  --accent-glow2: rgba(0,102,204,0.05);
+  --blue: #0066cc;
+  --blue-glow: rgba(0,102,204,0.10);
+  --grad: linear-gradient(90deg, #0066cc, #4d94ff);
+
+  /* Text hierarchy */
+  --text: #1d1d1f;
+  --text2: #6e6e73;
+  --text3: #86868b;
+  --heading: #1d1d1f;
+
+  /* Radii — Apple-rounded */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-pill: 980px;
+
+  /* Shadows — soft, directional */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
+  --shadow-lg: 0 12px 36px rgba(0,0,0,0.10);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.06);
+
+  /* Type — SF Pro stack */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Sidebar tokens (layered over file 2) */
+  --sb-bg: #ffffff;
+  --sb-border: rgba(0,0,0,0.08);
+  --nav-hover-bg: rgba(0,0,0,0.04);
+  --nav-active-bg: rgba(0,102,204,0.07);
+  --nav-active-color: #0066cc;
+  --nav-active-bar: #0066cc;
+  --prog-fill: #0066cc;
+  --prog-track: rgba(0,0,0,0.08);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   1b · DESIGN TOKENS — DARK (html.preload-dark + body.dark-mode)
+   ───────────────────────────────────────────────────────────── */
+html.preload-dark,
+body.dark-mode {
+  --bg: #000000;
+  --surface: #161617;
+  --surface2: #1c1c1e;
+  --surface3: #2c2c2e;
+  --glass: rgba(255,255,255,0.04);
+  --glass2: rgba(255,255,255,0.07);
+
+  --border: rgba(255,255,255,0.10);
+  --border2: rgba(255,255,255,0.16);
+  --border3: rgba(255,255,255,0.24);
+
+  --accent: #2997ff;
+  --accent2: #7cc0ff;
+  --accent3: #2997ff;
+  --accent-h: #47a6ff;
+  --accent-glow: rgba(41,151,255,0.14);
+  --accent-glow2: rgba(41,151,255,0.07);
+  --blue: #2997ff;
+  --blue-glow: rgba(41,151,255,0.14);
+  --grad: linear-gradient(90deg, #2997ff, #7cc0ff);
+
+  --text: #f5f5f7;
+  --text2: #a1a1a6;
+  --text3: #6e6e73;
+  --heading: #ffffff;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md: 0 4px 18px rgba(0,0,0,0.5);
+  --shadow-lg: 0 14px 40px rgba(0,0,0,0.6);
+  --shadow-card: 0 4px 28px rgba(0,0,0,0.5);
+}
+body.dark-mode,
+html.preload-dark body {
+  --sb-bg: #0a0a0b;
+  --sb-border: rgba(255,255,255,0.08);
+  --nav-hover-bg: rgba(255,255,255,0.05);
+  --nav-active-bg: rgba(41,151,255,0.12);
+  --nav-active-color: #2997ff;
+  --nav-active-bar: #2997ff;
+  --prog-fill: #2997ff;
+  --prog-track: rgba(255,255,255,0.10);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  letter-spacing: -0.003em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2 · SIDEBAR — calmer Apple chrome
+   ───────────────────────────────────────────────────────────── */
+#sidebar {
+  background: var(--sb-bg);
+  border-right: 1px solid var(--sb-border);
+}
+.sidebar-header { background: var(--sb-bg); }
+
+/* Logo image — soft rounded plate */
+#sidebar > div:first-child img {
+  border-radius: 14px !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Section labels — quiet */
+.nav-section-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+}
+
+/* Nav items — roomier, rounded hover, gradient active bar */
+.nav-item {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  border-radius: 8px;
+  margin: 1px 8px;
+  width: auto;
+  padding: 7px 12px;
+}
+.nav-item:hover { background: var(--nav-hover-bg); }
+.nav-item.active {
+  background: var(--nav-active-bg);
+  color: var(--nav-active-color);
+  font-weight: 600;
+}
+.nav-item.active::before {
+  left: -8px;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--grad);
+}
+.nav-item .num { font-family: var(--font-body); }
+
+/* Active nav text + number — beat the hardcoded #0A84FF in files 4/5 */
+body.light-mode .nav-item.active,
+html.preload-light body .nav-item.active,
+body.light-mode .nav-item.active .num,
+body.light-mode .nav-item.active .num-token,
+html.preload-light body .nav-item.active .num,
+body.dark-mode .nav-item.active,
+html.preload-dark body .nav-item.active,
+body.dark-mode .nav-item.active .num,
+body.dark-mode .nav-item.active .num-token,
+html.preload-dark body .nav-item.active .num {
+  color: var(--nav-active-color);
+}
+
+/* Progress fill uses the gradient */
+.sidebar-progress-fill,
+.page-progress-fill { background: var(--grad); }
+
+/* Discord card in sidebar footer — keep brand, soften shell */
+#sidebar a[href*="discord.gg"] { border-radius: 14px !important; }
+
+/* ─────────────────────────────────────────────────────────────
+   3 · DESKTOP HEADER CONTROLS — glass pills (Apple nav)
+   ───────────────────────────────────────────────────────────── */
+#desktop-header-controls {
+  gap: 10px;
+}
+.dhc-btn {
+  height: 36px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border2);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  box-shadow: none;
+}
+body.dark-mode .dhc-btn { background: rgba(22,22,23,0.6); }
+.dhc-btn:hover {
+  border-color: var(--border3);
+  background: var(--surface);
+  color: var(--heading);
+}
+
+/* Theme toggle pill, if present */
+#desktop-header-controls .theme-toggle,
+#desktop-header-controls [class*="theme"] { border-radius: var(--r-pill) !important; }
+
+/* Mobile header — glass */
+#mobile-header {
+  background: rgba(251,251,253,0.82) !important;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+body.dark-mode #mobile-header { background: rgba(0,0,0,0.72) !important; }
+.hdr-btn { border-radius: var(--r-pill); }
+.hdr-btn:hover, .hdr-btn:active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow2);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4 · HERO — editorial, gradient accent word
+   ───────────────────────────────────────────────────────────── */
+.hero {
+  background: var(--surface);
+  padding: 72px var(--content-pad) 60px;
+}
+.hero::after { background: var(--grad) !important; opacity: 0.55; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.2vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+}
+/* Accent word → gradient clip (overrides all stage solid colors) */
+.hero h1 em,
+.hero.stage0 h1 em,
+.hero.stage1 h1 em,
+.hero.stage2 h1 em,
+.hero.stage3 h1 em,
+.hero.stage4 h1 em,
+.hero.stage5 h1 em {
+  font-style: normal;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.hero-eyebrow {
+  font-family: var(--font-body);
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.hero-eyebrow::before { background: var(--accent); opacity: 0.6; }
+.hero-sub { font-family: var(--font-body); font-size: 16.5px; line-height: 1.62; }
+/* Stat numbers — neutral heading (override phase-green etc.) */
+.hero .hsv,
+.hero.stage0 .hsv, .hero.stage1 .hsv, .hero.stage2 .hsv,
+.hero.stage3 .hsv, .hero.stage4 .hsv, .hero.stage5 .hsv,
+.hero.stage6 .hsv {
+  color: var(--heading) !important;
+  font-family: var(--font-display);
+}
+.hsl { font-family: var(--font-body); }
+/* Calm the stat cards into editorial dividers */
+.hero-stat,
+body.light-mode .hero-stat {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5 · TYPOGRAPHY — content area
+   ───────────────────────────────────────────────────────────── */
+.module-content h2,
+.module-content h3,
+h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+.module-content h2 {
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 600;
+  margin: 56px 0 18px;
+  letter-spacing: -0.025em;
+}
+.module-content h2:first-child { margin-top: 0; }
+p, li { font-family: var(--font-body); }
+
+/* ─────────────────────────────────────────────────────────────
+   6 · CARDS & SURFACES — rounder, softer
+   ───────────────────────────────────────────────────────────── */
+.box, .framework, .metric-card, .tool-block,
+.step, .budget-card, .faq-item, .table-wrap,
+.swipe-card, .tkc, .itkc, .ai-tool-card, .inspo-card,
+.faq-page-item, .gloss-page-item, .glossary-box,
+.email-resource-card, .consulting-tier, .checklist-item,
+.vital-card-premium, .decision {
+  border-radius: var(--r-lg) !important;
+}
+.box { padding: 22px 26px; }
+
+.step:hover, .metric-card:hover, .tool-block:hover,
+.budget-card:hover, .faq-item:hover {
+  border-color: var(--border2);
+}
+
+/* Step number → gradient chip */
+.step-num {
+  background: var(--accent-glow);
+  border-color: transparent;
+  color: var(--accent);
+  border-radius: 9px;
+}
+
+/* Inline tools grid + cards (home "More Resources", in-module CTAs) */
+.inline-tools-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+.module-content .inline-tools-grid,
+.faq-page-a .inline-tools-grid {
+  background: transparent !important;
+  border: none !important;
+}
+.itkc {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-lg) !important;
+  padding: 22px 24px !important;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.itkc:hover,
+.module-content .itkc:hover,
+.faq-page-a .itkc:hover {
+  border-color: var(--border2) !important;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card) !important;
+}
+.itkc-name { font-family: var(--font-display); font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.itkc-desc { font-family: var(--font-body); }
+.itkc-cta {
+  background: var(--accent-glow2) !important;
+  border: 1px solid var(--accent-glow) !important;
+  color: var(--accent) !important;
+}
+.itkc:hover .itkc-cta {
+  background: var(--accent-glow) !important;
+  border-color: var(--accent) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   7 · BUTTONS & LINKS — Apple pills
+   ───────────────────────────────────────────────────────────── */
+.module-nav-btn {
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+.module-nav-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.module-nav-btn.primary:hover {
+  background: var(--accent-h);
+  border-color: var(--accent-h);
+}
+.tool-link {
+  border-radius: var(--r-pill);
+  border-color: var(--accent-glow);
+  color: var(--accent);
+}
+.tool-link:hover {
+  background: var(--accent-glow2);
+  border-color: var(--accent);
+}
+a { color: var(--accent); }
+
+/* Generic primary CTA buttons that were orange */
+.ob-cta, .rb-btn, .aff-cta-btn, .tkc-link,
+.vital-card-premium a.vc-btn, .ai-tools-cta a {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+  border-radius: var(--r-pill) !important;
+  box-shadow: none !important;
+}
+.ob-cta:hover, .rb-btn:hover, .aff-cta-btn:hover, .tkc-link:hover {
+  background: var(--accent-h) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8 · ORANGE NEUTRALIZATION SWEEP
+   Repaints leftover hardcoded pre-Apple orange tints/glows to blue.
+   ───────────────────────────────────────────────────────────── */
+.glossary-tag {
+  background: var(--accent-glow2) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--accent-glow) !important;
+}
+.faq-page-cat-badge,
+.faq-page-cat-badge[data-cat="Meta Ads"],
+.faq-page-cat-badge[data-cat="Ads"] {
+  background: var(--accent-glow) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--accent-glow) !important;
+  box-shadow: none !important;
+}
+.offer-pill, .vc-tag {
+  background: var(--accent-glow2) !important;
+  border: 1px solid var(--accent-glow) !important;
+  color: var(--accent) !important;
+}
+.faq-tactical-box {
+  background: var(--accent-glow2) !important;
+  border-left-color: var(--accent) !important;
+}
+a.aff-link {
+  color: var(--accent) !important;
+  border-bottom: 1px solid var(--accent-glow) !important;
+}
+a.aff-link:hover { color: var(--accent-h) !important; border-color: var(--accent) !important; }
+
+.vital-card-premium:hover { border-color: var(--accent) !important; }
+.vital-card-premium .vc-logo {
+  background: var(--grad) !important;
+}
+
+#resume-banner {
+  background: var(--accent-glow2) !important;
+  border: 1px solid var(--accent-glow) !important;
+}
+
+/* Subtle hero ambient + onboarding tints → blue */
+.ob-top { background: linear-gradient(135deg, var(--accent-glow), transparent) !important; }
+.ob-option.selected {
+  border-color: var(--accent) !important;
+  background: var(--accent-glow2) !important;
+  box-shadow: 0 0 0 1px var(--accent-glow) !important;
+}
+
+/* Scroll-to-top hover → blue */
+#scroll-top-btn:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Catch-all: any element still carrying an orange-ish box-shadow gets calmed.
+   (low risk — only affects hover/glow shadows.) */
+.community-cta-links a,
+.et-nudge-btn {
+  background: var(--accent-glow) !important;
+  border: 1px solid var(--accent-glow) !important;
+  color: var(--accent) !important;
+  box-shadow: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   9 · MISC POLISH
+   ───────────────────────────────────────────────────────────── */
+.faq-q, .faq-page-q { font-family: var(--font-body); }
+.faq-item.open .faq-q,
+.faq-page-item.open .faq-page-q { background: var(--nav-hover-bg) !important; }
+
+.glossary-term, .gt, .swipe-card-title, .tkc .tkc-name,
+.glossary-title { font-family: var(--font-display); }
+
+/* Swipe card arrow → accent on hover */
+.swipe-card:hover .swipe-card-arrow {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+/* Tables — rounded container already; soften header */
+thead, th { font-family: var(--font-body); }
