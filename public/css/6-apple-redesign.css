@@ -1,0 +1,63 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   FIRST SALE SOCIETY — 6 · FINAL ACCENTS
+   Thin layer that wins last in the cascade. Reserved for one-off overrides
+   and final touches that must sit on top of everything else.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Smooth theme transition across the whole shell when toggling light/dark */
+#sidebar, #main, .box, .step, .framework, .tkc, .swipe-card, .itkc,
+.dhc-btn, .hdr-btn, .sfb-section, .panel-header {
+  transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+
+/* Keep the active nav item legible the instant the page loads (before JS),
+   matching the gradient rail treatment from file 2. */
+.nav-item.active { font-weight: 600; }
+
+/* Gentle hover lift on primary CTAs site-wide, unified */
+.btn-primary:hover,
+.tkc-link:hover,
+.ai-tool-card-link:hover,
+.vc-btn:hover { transform: translateY(-1px); }
+
+/* ─────────────────────────────────────────────────────────────
+   SLIMMER MODULE HERO (audit S6)
+   Scoped to .page-panel so ONLY the in-module heroes shrink — the
+   marketing heroes on home / toolkit / swipe / ai-ad-lab are
+   unaffected. A module is a textbook page visited 27 times, not a
+   landing page; this gets readers to the lesson ~35% sooner without
+   changing the centered Apple direction.
+   ───────────────────────────────────────────────────────────── */
+.page-panel .hero {
+  padding: clamp(40px, 5.5vw, 76px) var(--content-pad) clamp(32px, 4.5vw, 56px);
+}
+.page-panel .hero h1 {
+  font-size: clamp(32px, 4.6vw, 56px);
+}
+.page-panel .hero-sub {
+  font-size: clamp(16px, 1.5vw, 19px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FLATTEN GRADIENT OVER-USE (audit #8)
+   Apple uses flat ink almost everywhere and reserves gradient for a
+   single accent moment. We flatten the hero H1 highlight, the reading
+   progress bar, and the active-nav rail to solid accent — and keep ONE
+   gradient moment per page (the last hero stat) plus the small brand
+   logo mark. Solid accent reads calmer and more system-native.
+   ───────────────────────────────────────────────────────────── */
+.hero h1 em {
+  background: none;
+  -webkit-text-fill-color: var(--accent);
+  color: var(--accent);
+}
+.page-progress-fill {
+  background: var(--accent);
+  box-shadow: none;
+}
+.nav-item.active::before {
+  background: var(--accent);
+}
+.nav-item.active .nav-check {
+  background: var(--accent);
+}
