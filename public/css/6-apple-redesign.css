@@ -1,0 +1,327 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   FIRST SALE SOCIETY — 6 · FINAL ACCENTS
+   Thin layer that wins last in the cascade. Reserved for one-off overrides
+   and final touches that must sit on top of everything else.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Smooth theme transition across the whole shell when toggling light/dark */
+#sidebar, #main, .box, .step, .framework, .tkc, .swipe-card, .itkc,
+.dhc-btn, .hdr-btn, .sfb-section, .panel-header {
+  transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+
+/* Keep the active nav item legible the instant the page loads (before JS),
+   matching the gradient rail treatment from file 2. */
+.nav-item.active { font-weight: 600; }
+
+/* Gentle hover lift on primary CTAs site-wide, unified */
+.btn-primary:hover,
+.tkc-link:hover,
+.ai-tool-card-link:hover,
+.vc-btn:hover { transform: translateY(-1px); }
+
+/* ─────────────────────────────────────────────────────────────
+   SLIMMER MODULE HERO (audit S6)
+   Scoped to .page-panel so ONLY the in-module heroes shrink — the
+   marketing heroes on home / toolkit / swipe / ai-ad-lab are
+   unaffected. A module is a textbook page visited 27 times, not a
+   landing page; this gets readers to the lesson ~35% sooner without
+   changing the centered Apple direction.
+   ───────────────────────────────────────────────────────────── */
+.page-panel .hero {
+  padding: clamp(40px, 5.5vw, 76px) var(--content-pad) clamp(32px, 4.5vw, 56px);
+}
+.page-panel .hero h1 {
+  font-size: clamp(32px, 4.6vw, 56px);
+}
+.page-panel .hero-sub {
+  font-size: clamp(16px, 1.5vw, 19px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FLATTEN GRADIENT OVER-USE (audit #8)
+   Apple uses flat ink almost everywhere and reserves gradient for a
+   single accent moment. We flatten the hero H1 highlight, the reading
+   progress bar, and the active-nav rail to solid accent — and keep ONE
+   gradient moment per page (the last hero stat) plus the small brand
+   logo mark. Solid accent reads calmer and more system-native.
+   ───────────────────────────────────────────────────────────── */
+.hero h1 em {
+  background: none !important;
+  -webkit-text-fill-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+.page-progress-fill {
+  background: var(--accent) !important;
+  box-shadow: none !important;
+}
+.nav-item.active::before {
+  background: var(--accent) !important;
+}
+.nav-item.active .nav-check {
+  background: var(--accent) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CALCULATOR SLIDERS (ks-engine range inputs)
+   Inline styles can't reach the thumb pseudo-elements, so the thumb
+   is styled here. Track fill is handled inline per-value.
+   ───────────────────────────────────────────────────────────── */
+.ks-engine input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+  margin-top: -8px;
+}
+.ks-engine input[type='range']::-webkit-slider-thumb:active {
+  transform: scale(1.12);
+}
+.ks-engine input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 980px;
+}
+.ks-engine input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+.ks-engine input[type='range']::-moz-range-track {
+  height: 6px;
+  border-radius: 980px;
+}
+:root.dark .ks-engine input[type='range']::-webkit-slider-thumb,
+.dark .ks-engine input[type='range']::-webkit-slider-thumb {
+  background: #f5f5f7;
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SWIPE FILES — flatten the 12 rainbow per-category accents to the
+   single Apple system accent (audit #7/#8) and refine the pills,
+   section headers, and cards to match the site theme. These rules
+   use var(--accent) directly so they win over the inline
+   style="--sfb-accent:#xxxxxx" set per category in the panel markup.
+   This file loads AFTER 4-features-redesign.css, so it overrides.
+   ───────────────────────────────────────────────────────────── */
+.sfb-filter-bar { gap: 8px; }
+.sfb-filter-btn {
+  border-radius: 980px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-weight: 500;
+  padding: 8px 15px;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+.sfb-filter-btn:hover {
+  border-color: var(--border2);
+  color: var(--heading);
+  background: var(--glass-d);
+}
+/* Solid system-accent fill on the active pill — clean segmented look */
+.sfb-filter-btn.active {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+.sfb-count {
+  background: var(--surface3);
+  color: var(--text3);
+}
+.sfb-filter-btn.active .sfb-count {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+/* Sections: uniform hairline, single accent left-rail */
+.sfb-section {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.sfb-section:hover { border-color: var(--border2); }
+.sfb-section.sfb-open {
+  border-color: var(--border2);
+  box-shadow: var(--shadow-sm);
+}
+.sfb-section-header {
+  border-left: 3px solid var(--accent) !important;
+}
+.sfb-section-count {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+.sfb-section.sfb-open .sfb-section-header {
+  background: var(--glass-d);
+}
+
+/* Cards: tags + arrows on the single accent */
+.swipe-card-tag {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+.swipe-card-cta { color: var(--accent); }
+.swipe-card:hover .swipe-card-arrow {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FEEDBACK WIDGET — fixed bottom-right, desktop + mobile
+   ───────────────────────────────────────────────────────────── */
+.fss-feedback-btn {
+  position: fixed;
+  right: 20px;
+  /* Sit above #scroll-top-btn (44px tall, bottom: 24px → top edge at 68px).
+     80px gives a 12px gap between the two. */
+  bottom: 80px;
+  z-index: 1200;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px 11px 14px;
+  border-radius: 980px;
+  background: var(--accent);
+  color: #fff;
+  font: 600 14px/1 var(--font-display, -apple-system, system-ui, sans-serif);
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.12);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.fss-feedback-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.14);
+}
+.fss-feedback-icon { flex: none; }
+.fss-feedback-label { white-space: nowrap; }
+.fss-feedback-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 2px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.16s ease;
+}
+.fss-feedback-x:hover { background: rgba(255, 255, 255, 0.4); }
+
+.fss-feedback-reopen {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  z-index: 1200;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent);
+  border: 1px solid var(--border2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.fss-feedback-reopen:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile: collapse full pill → icon-only circle so it stays unobtrusive.
+   Sits just above the sticky module-nav bar (#mobile-module-bar ≈ 68px)
+   plus the iOS home indicator. The dismiss X is also hidden — the icon
+   opens the form directly; users can dismiss via the X in the form. */
+@media (max-width: 980px) {
+  .fss-feedback-btn {
+    right: 14px;
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    /* Collapse to a 44px circle — same feel as the reopen dot */
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .fss-feedback-label { display: none; }
+  .fss-feedback-x { display: none; }
+  .fss-feedback-reopen {
+    right: 14px;
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TOOLKIT — flatten the per-category rainbow accent bars to the
+   single Apple system accent so the toolkit matches the Swipe Files
+   treatment. The bar colour is set inline per category
+   (style="background:linear-gradient(90deg,#ffd700,transparent)"),
+   so this override needs !important to win.
+   ───────────────────────────────────────────────────────────── */
+.tk-page .tk-cat-bar {
+  background: linear-gradient(90deg, var(--accent), transparent) !important;
+  opacity: 1;
+  height: 3px;
+}
+/* Calmer category icons: the emoji stays, but no rainbow chrome around it */
+.tk-page .tk-cat-num { color: var(--accent); }
+
+/* ─────────────────────────────────────────────────────────────
+   SAFETY NET — toolkit + swipe card LAYOUT
+   Your screenshot showed the toolkit cards losing their grid and
+   logo sizing (giant logo squares, full-width stacked cards). That
+   happens when the card rules in 4-features-redesign.css don't apply
+   in the running build. These rules duplicate the essential layout so
+   the cards stay correct even if that upstream file is stale/missing.
+   Identical to file 4 when it loads, so no visual change there.
+   ───────────────────────────────────────────────────────────── */
+.tk-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.tkc {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg, 18px);
+}
+.tkc-head { display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }
+.tkc-logo-wrap {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface3);
+}
+.tkc-logo { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+.tkc-logo-fb { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; }
+.tkc-meta { min-width: 0; }
+.tkc-body { flex: 1 1 auto; }
