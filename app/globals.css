@@ -1,7 +1,0 @@
-/* First Sale Society — global stylesheet.
-   The 5 production CSS files are linked directly via <link> tags in
-   app/layout.tsx (see public/css/) rather than @import'd here, because
-   Next's CSS pipeline tries to resolve @import url('/path') as a bundler
-   module rather than a literal public-asset URL. This file is kept for any
-   minimal Next-specific resets only — it intentionally does NOT redefine
-   any design tokens, colors, or component styles. */
